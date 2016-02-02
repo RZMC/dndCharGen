@@ -13,6 +13,11 @@ def overmenu():
 
 	if menu1 == "1":
 		#character Generation
+		#needs several options
+		#option-1 is appearance
+		#option-2 is dice rolls
+		charGenMenu = input()
+
 		pass
 	elif menu1 == "2":
 		#Utilities
@@ -26,6 +31,14 @@ def overmenu():
 	else:
 		print("Please try again")
 		return overmenu()
+
+def charGen_diceRollBasic():
+	#this is where dice rolls and the handling of said dice rolls goes
+	#needs 6 sets of 4d6 rolls
+	#needs to drop the lowest for each set
+	#needs to output each set to a list of three rolls within a list of 6 sets
+	#needs Mulligan option where all 6 sets are rerolled but can only be run one time
+
 
 def quit():
 	input("Press Enter to close the program")
