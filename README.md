@@ -5,27 +5,32 @@ I will add to the outline as I go
 
 # Outline
 
-Over Menu
-  #create a main menu that accesses the submenues
-1 Character Gen
-  #menu specificly for character generation, if the tables have not been loaded it should request basic tables
-  (1a) Appearance
-    #preform dice rolls disregarding lowest and creating 6 lists of the three highest rolls for each set of rolls
-    #requires a RULE file with all the relevant information, some GMs/DMs may want to change it up so at least 3 tables should be made with comments
-    #should request rule file if none is present so player does not have
-      #basic table, 6 sets of rolls, 4 rolls per set, drop lowest in each set, single mulligan option rule should be present
-      #same as above, no mulligan
-      #same as first table, reroll die on 1
-    #probably list current rules like "Mulligan: none" and "reroll lowest" just so peopel know what is goign on
-(1b) Attribute Roll, selection, and modifiers
-(1c) Class
-2 Utilities
-(2a) Import Rules and Tables
-  #import files for character gen rules and reference tables
-  #should probably have a submenu or be split amongst utilities
-  #may want to have visual aid
-  #should probably have a config setting to automatically import rules and tables
-3 Options
+##Over Menu
+
+create a main menu that accesses the submenues
+  
+###Character Gen
+  menu specificly for character generation, if the tables have not been loaded it should request basic tables
+  1. Appearance
+    1. preform dice rolls disregarding lowest and creating 6 lists of the three highest rolls for each set of rolls
+    2. requires a RULE file with all the relevant information, some GMs/DMs may want to change it up so at least 3 tables should be made with comments
+    3. should request rule file if none is present so player does not have
+    4. basic table, 6 sets of rolls, 4 rolls per set, drop lowest in each set, single mulligan option rule should be present
+    5. same as above, no mulligan
+    6. same as first table, reroll die on 1
+    7. probably list current rules like "Mulligan: none" and "reroll lowest" just so peopel know what is goign on
+  2. Attribute Roll, selection, and modifiers
+  3. Class
+
+###Utilities
+1. Import Rules and Tables
+  1. import files for character gen rules and reference tables
+  2. should probably have a submenu or be split amongst utilities
+  3. may want to have visual aid
+  4. should probably have a config setting to automatically import rules and tables
+
+###Options
+
 
 
 # current tasks
