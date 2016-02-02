@@ -1,6 +1,11 @@
 # dndCharGen
 Renpy dnd3.5 character generator, I don't know what I'm doing
 
+##Goals
+1. Visually represented in Ren'py
+2. Preforms all char gen functions with limited hand holding and the ability to go back and change decisions like which stats go where and removal of gear after adding it on
+3. avoid getting taken down by having all the licensed content be absent from the code and simply written up by users and imported as needed, like gear tables and class growth
+
 I will add to the outline as I go
 
 # Outline
