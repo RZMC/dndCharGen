@@ -1,39 +1,46 @@
 #imports the command for generating random numbers
 from random import randint
 
-ruleAttributeRollsOn=False
+"""Rule Placeholders"""
+class attributeRolls(object):
+	ruleCheck=False
+	def __init__(self):
+		self.checkName="Dice"
+
+
+'''rule check method goes here'''
+def rulecheck(s):
+	if s.ruleCheck == True:
+		ruleCheck = True
+		return print("%s Rules: Present" % s.checkName)
+	elif s.ruleCheck == False:
+		return print("%s Rules: Not Present please select" % s.checkName)
+
+
+#'''config file check goes here'''
+
 
 '''Rules for attribute rolls'''
 class attributeRolls(object):
 	'''sets the rule toggle to True so that the system will know that the rule has been loaded'''
-	ruleAttributeRolls=True
+	ruleCheck=True
 	def __init__(self):
+		self.checkName="Dice"
 		pass
 
 
-
-
-
-
-
-
-basic = attributeRolls()
-ruleAttributeRollsOn=basic.ruleAttributeRolls
-
-
-
-
-
+'''welcome message'''		
+print("---Welcome to the prototype---")
 
 
 print("")
+"""Rule Checks"""
+dice = attributeRolls()
+rulecheck(dice)
 
-if ruleAttributeRolls == True:
-	print("True")
-elif ruleAttributeRolls == False:
-	print("False")
+	
 
-print("Welcome to the prototype")
+print("")
 
 #overmenu function
 def overmenu():
