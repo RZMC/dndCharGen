@@ -1,6 +1,41 @@
+#imports the command for generating random numbers
+from random import randint
+
+ruleAttributeRollsOn=False
+
+'''Rules for attribute rolls'''
+class attributeRolls(object):
+	'''sets the rule toggle to True so that the system will know that the rule has been loaded'''
+	ruleAttributeRolls=True
+	def __init__(self):
+		pass
+
+
+
+
+
+
+
+
+basic = attributeRolls()
+ruleAttributeRollsOn=basic.ruleAttributeRolls
+
+
+
+
+
+
+
+print("")
+
+if ruleAttributeRolls == True:
+	print("True")
+elif ruleAttributeRolls == False:
+	print("False")
+
 print("Welcome to the prototype")
 
-#overmenu
+#overmenu function
 def overmenu():
 	print("Please make a selection")
 	print("(1) Character Generation")
@@ -9,23 +44,27 @@ def overmenu():
 	print("(4) Quit Program")
 
 	menu1 =input()
-	print("you entered %s" % menu1)
 
 	if menu1 == "1":
+		print("You selected %s Character Generation" % menu1)
 		#character Generation
 		#needs several options
 		#option-1 is appearance
 		#option-2 is dice rolls
 		charGenMenu = input()
 
+
 		pass
 	elif menu1 == "2":
+		print("You selected %s Utilities" % menu1)
 		#Utilities
 		pass
 	elif menu1 == "3":
+		print("You selected %s Options" % menu1)
 		#Options
 		pass
 	elif menu1 == "4":
+		print("You selected %s Exit Program" % menu1)
 		return quit()
 		#Exit Program
 	else:
@@ -38,10 +77,15 @@ def charGen_diceRollBasic():
 	#needs to drop the lowest for each set
 	#needs to output each set to a list of three rolls within a list of 6 sets
 	#needs Mulligan option where all 6 sets are rerolled but can only be run one time
-
+	pass
 
 def quit():
 	input("Press Enter to close the program")
 
 overmenu()
+
 input("Nothing left to run, press Enter to close the program")
+
+
+
+
