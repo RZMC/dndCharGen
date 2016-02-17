@@ -1,46 +1,64 @@
-#imports the command for generating random numbers
+'''imports the command for generating random numbers'''
 from random import randint
 
-"""Rule Placeholders"""
+print()
+print("==========Program Start==========")
+print()
+
+print()
+print("==========Checking Modules==========")
+print()
+
+"""Rule and Table Placeholders"""
 class attributeRolls(object):
 	ruleCheck=False
 	def __init__(self):
 		self.checkName="Dice"
+class raceRules(object):
+	ruleCheck=False
+	def __init__(self):
+		self.checkName="Race"
+
+'''config file check that handles imports goes here'''
+#from pp_module_diceRule import attributeRolls
+from pp_module_diceRule import dice
+#'''importing like in the following line does not work except for singular instances, just for reference'''
+#import pp_module_diceRule
+
+dice.statRolls()
+
+print()
 
 
-'''rule check method goes here'''
+
+'''rule check method goes here, referenced later for checks'''
 def rulecheck(s):
 	if s.ruleCheck == True:
 		ruleCheck = True
-		return print("%s Rules: Present" % s.checkName)
+		print("%s Rules Status =" % s.checkName, s.ruleCheck)
+		return print("%s Rules Status: Present" % s.checkName)
 	elif s.ruleCheck == False:
-		return print("%s Rules: Not Present please select" % s.checkName)
+		print("%s Rules Status =" % s.checkName, s.ruleCheck)
+		return print("%s Rules Status: Not Present please select" % s.checkName)
 
-
-#'''config file check goes here'''
-
-
-'''Rules for attribute rolls'''
-class attributeRolls(object):
-	'''sets the rule toggle to True so that the system will know that the rule has been loaded'''
-	ruleCheck=True
-	def __init__(self):
-		self.checkName="Dice"
-		pass
 
 
 '''welcome message'''		
-print("---Welcome to the prototype---")
+print("==========Welcome to the prototype==========")
 
 
 print("")
 """Rule Checks"""
-dice = attributeRolls()
-rulecheck(dice)
+"""Referenced Immediately and as option 5 of overmenu"""
+"""checks to make sure rule has been loaded by checking 'ruleCheck' variable in each class using 'rulecheck' method created earlier in the prototype main file"""
+def ruleCheckList():
+	rulecheck(dice)
+	rulecheck(raceRules())
+	return
 
-	
-
+ruleCheckList()
 print("")
+
 
 #overmenu function
 def overmenu():
@@ -74,8 +92,17 @@ def overmenu():
 		print("You selected %s Exit Program" % menu1)
 		return quit()
 		#Exit Program
+	elif menu1 == "5":
+		print("You selected %s Check Imports" % menu1)
+		print()
+		ruleCheckList()
+		print()
+		return overmenu()
+		#Exit Program
 	else:
-		print("Please try again")
+		print()
+		print("Invalid selection please try again")
+		print()
 		return overmenu()
 
 def charGen_diceRollBasic():
