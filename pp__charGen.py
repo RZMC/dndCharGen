@@ -116,3 +116,5 @@ def quit():
 	input("Press Enter to close the program")
 mainmenu()
 input("Nothing left to run, press Enter to close the program")
+
+'''Oh god I'm retarded'''
