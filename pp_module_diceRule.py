@@ -73,7 +73,7 @@ class attributeRolls(object):
 dice=attributeRolls(number_of_sides_on_die, die_number_per_set, sets_of_dice_rolls)
 
 
-'''needs equation to produce modifiers, check for divite by 2, cant jsut subtract by 10'''
+'''needs equation to produce modifiers, check for divite by 2, cant just subtract by 10'''
 '''statRolls and displayStatRolls still needs dynamic reroll for lowest or threshhold, drop lowest and totaling that will print out next to the set rolls like "[3, 4, 3, 4] 1" or something, maybe attribute modifiers too'''
 '''Also Manual input with a statement that says they were manually input'''
 '''probably number of times rolled statement too for mulligans until I can figure out some good mulligan rules'''
