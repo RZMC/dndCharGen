@@ -8,7 +8,8 @@ plsEn="Please enter an option:"
 class nomod(object):
 	ruleCheck=False
 	def n(self):
-		return print("\nNo %s Module Loaded" % str(self.checkName))
+		print("\nNo %s Module Loaded" % str(self.checkName))
+		return
 """Rule and Table Placeholders"""
 class attributeRolls(nomod):
 	def __init__(self):
@@ -28,7 +29,7 @@ print("==========Checking Modules==========")
 '''config file check that handles imports goes here, until them import will just go here'''
 from pp_module_diceRule import dice
 #from pp_module_raceRule import race
-print()
+print("")
 dice.moduleCheck()
 '''importing like in the following line does not work except for singular instances, just for reference'''
 #import pp_module_diceRule
@@ -36,10 +37,12 @@ dice.moduleCheck()
 def rulecheck(s):
 	if s.ruleCheck==True:
 		ruleCheck=True
-		return print("%s Rules: Present and %s." % (s.checkName, s.ruleCheck))
+		print("%s Rules: Present and %s." % (s.checkName, s.ruleCheck))
+		return
 	elif s.ruleCheck==False:
-		return print("%s Rules: Not Present and %s, please select" % (s.checkName, s.ruleCheck))
-print()
+		print("%s Rules: Not Present and %s, please select" % (s.checkName, s.ruleCheck))
+		return
+print("")
 """Rule Checks"""
 """Referenced Immediately and as option 5 of overmenu"""
 """checks to make sure rule has been loaded by checking 'ruleCheck' variable in each class using 'rulecheck' method created earlier in the prototype main file"""
@@ -50,7 +53,7 @@ def ruleCheckList():
 ruleCheckList()
 def charmenu():
 	print("\n==========Character Generation==========\n\n[1] Display Current Character Information\n[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
-	menuSel=input(plsEn)
+	menuSel=str(input(plsEn))
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif menuSel=="1":
@@ -71,7 +74,7 @@ def charmenu():
 def utilitymenu():
 	print("\n==========Utilities==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
-	menuSel=input(plsEn)
+	menuSel=str(input(plsEn))
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif (menuSel=="*")or(menuSel=="q"):
@@ -82,7 +85,7 @@ def utilitymenu():
 def optionsmenu():
 	print("\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
-	menuSel=input(plsEn)
+	menuSel=str(input(plsEn))
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif (menuSel=="*")or(menuSel=="q"):
@@ -92,7 +95,7 @@ def optionsmenu():
 		return optionsmenu()
 def mainmenu():
 	print("\n==========Main Menu==========\n\n[1] Character Generation\n[2] Utilities\n[3] Options\n[4] check imports\n[*] or [q] Quit Program")
-	menuSel =input(plsEn)
+	menuSel =str(input(plsEn))
 
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
@@ -116,5 +119,3 @@ def quit():
 	input("Press Enter to close the program")
 mainmenu()
 input("Nothing left to run, press Enter to close the program")
-
-'''Oh god I'm retarded'''
