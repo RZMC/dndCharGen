@@ -2,6 +2,7 @@
 from random import randint
 print("\n==========Program Start==========")
 """common Lines and zeroing"""
+menuSel="string"
 invalid=("\nInvalid selection please try again")
 plsEn="Please enter an option:"
 """Rule and table placeholder base"""
@@ -53,7 +54,7 @@ def ruleCheckList():
 ruleCheckList()
 def charmenu():
 	print("\n==========Character Generation==========\n\n[1] Display Current Character Information\n[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
-	menuSel=str(input(plsEn))
+	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif menuSel=="1":
@@ -74,7 +75,7 @@ def charmenu():
 def utilitymenu():
 	print("\n==========Utilities==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
-	menuSel=str(input(plsEn))
+	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif (menuSel=="*")or(menuSel=="q"):
@@ -85,7 +86,7 @@ def utilitymenu():
 def optionsmenu():
 	print("\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
-	menuSel=str(input(plsEn))
+	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif (menuSel=="*")or(menuSel=="q"):
@@ -95,8 +96,7 @@ def optionsmenu():
 		return optionsmenu()
 def mainmenu():
 	print("\n==========Main Menu==========\n\n[1] Character Generation\n[2] Utilities\n[3] Options\n[4] check imports\n[*] or [q] Quit Program")
-	menuSel =str(input(plsEn))
-
+	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):
 		return mainmenu()
 	elif menuSel=="1":
@@ -116,6 +116,6 @@ def mainmenu():
 		return mainmenu()
 def quit():
 	print("\nQuitting Program")
-	input("Press Enter to close the program")
+	raw_input("Press Enter to close the program")
 mainmenu()
-input("Nothing left to run, press Enter to close the program")
+raw_input("Nothing left to run, press Enter to close the program")
