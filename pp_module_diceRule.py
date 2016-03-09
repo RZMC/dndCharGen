@@ -79,3 +79,8 @@ dice=attributeRolls(number_of_sides_on_die, die_number_per_set, sets_of_dice_rol
 '''statRolls and displayStatRolls still needs dynamic reroll for lowest or threshhold, drop lowest and totaling that will print out next to the set rolls like "[3, 4, 3, 4] 1" or something, maybe attribute modifiers too'''
 '''Also Manual input with a statement that says they were manually input'''
 '''probably number of times rolled statement too for mulligans until I can figure out some good mulligan rules'''
+
+'''focus on a container for attributes that can be assigned to individual attributes'''
+'''something like score1 - score6 where each set of rolls assigns score(number) in a for statement'''
+'''needs variables for names of attributes'''
+'''then a method to assign attributes to the respective names'''
