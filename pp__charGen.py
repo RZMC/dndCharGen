@@ -8,8 +8,8 @@ print("\n==========Program Start==========")
 debug=False
 menuSel="string"
 mainReadout=1
-charDebugReadout=0
-invalid=("\nInvalid selection please try again")
+charReadout=0
+invalid=("Invalid selection please try again")
 plsEn="Please enter an option:"
 
 """Rule and table placeholder base"""
@@ -73,22 +73,45 @@ def ruleCheckList():
 
 
 def charmenu():
-
-	print("\n==========Character Generation==========\n\n[1] Display Current Character Information\n[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
+	#global variable check
+	global charReadout
+	#debug Options
+	charDebug1=""
+	if debug==True:charDebug1="+[11] Check Character Generation Modules\n"
+	elif debug==False:charDebug1==""
+	#header
+	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Character Generation==========\n")
+	#readout for char
+	if charReadout==0:print("\n")
+	elif charReadout==11:
+		ruleCheckList()
+		print("")
+	elif charReadout==999:print( "%s\n" % invalid)
+	charReadout=0
+	#Options list, it references debug options
+	print("[1] Display Current Character Information\n%s[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program" % charDebug1)
 	menuSel=raw_input(plsEn)
-	if (menuSel=="t")or(menuSel=="/"):
-		return mainmenu()
+	if (menuSel=="t")or(menuSel=="/"):return mainmenu()
 	elif menuSel=="1":
 		dice.displayStatResults()
 		return charmenu()
 	elif menuSel=="2":
 		dice.statRolls()
 		return charmenu()
-	elif (menuSel=="*")or(menuSel=="q"):
-		return quit()
+	elif (menuSel=="*")or(menuSel=="q"):return quit()
 	else:
-		print(invalid)
-		return charmenu()
+		"""MainMenu Debug Options"""
+		if debug==True:
+			if menuSel=="11":
+				print("")
+				charReadout=11
+				return charmenu()
+			else:
+				charReadout=999
+				return charmenu()
+		else:
+			charReadout=999
+			return charmenu()
 	#character Generation
 	#needs several options
 	#option-1 is appearance
@@ -108,7 +131,8 @@ def charmenu():
 def utilitymenu():
 	"""the following line checks the global debug variable so it doesn't freak out for usign a variable not defined in the function"""
 	global debug
-	print("\n==========Utilities==========\n")
+	#header
+	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Utilities==========\n")
 	if debug==False:
 		print("Debug Options: Inactive\n")
 	elif debug==True:
@@ -141,7 +165,7 @@ def utilitymenu():
 
 
 def optionsmenu():
-	print("\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
+	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
 	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):
@@ -168,46 +192,38 @@ def mainmenu():
 	global mainReadout
 	#debug Options
 	mainDebug1=""
-	if debug==True:
-		mainDebug1="+[11] Check Character Generation Modules\n"
-	elif debug==False:
-		mainDebug1==""
+	if debug==True:mainDebug1="+[11] Check Character Generation Modules\n"
+	elif debug==False:mainDebug1==""
 	#header
-	print("\n==========Main Menu==========\n")
-	#main readout
-	if mainReadout==1:
+	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Main Menu==========\n")
+	#readout for main
+	if mainReadout==0:print("\n")
+	elif mainReadout==11:
 		ruleCheckList()
 		print("")
+	elif mainReadout==999:print( "%s\n" % invalid)
+	else:print("\n")
 	mainReadout=0
 	#Options list, it references debug options
-	print("[1] Character Generation\n%s[2] Utilities\n[3] Options\n[4] check imports\n[*] or [q] Quit Program" % (mainDebug1))
+	print("[1] Character Generation\n%s[2] Utilities\n[3] Options\n[*] or [q] Quit Program" % (mainDebug1))
 	menuSel=raw_input(plsEn)
-	if (menuSel=="t")or(menuSel=="/"):
-		return mainmenu()
-	elif menuSel=="1":
-		return charmenu()
-	elif menuSel=="2":
-		return utilitymenu()
-	elif menuSel=="3":
-		return optionsmenu()
-	elif menuSel=="4":
-		print("You selected %s Check Imports\n"  % menuSel)
-		ruleCheckList()
-		return mainmenu()
-	elif (menuSel=="*")or(menuSel=="q"):
-		return quit()
+	if (menuSel=="t")or(menuSel=="/"):return mainmenu()
+	elif menuSel=="1":return charmenu()
+	elif menuSel=="2":return utilitymenu()
+	elif menuSel=="3":return optionsmenu()
+	elif (menuSel=="*")or(menuSel=="q"):return quit()
 	else:
 		"""MainMenu Debug Options"""
 		if debug==True:
 			if menuSel=="11":
 				print("")
-				mainReadout=1
+				mainReadout=11
 				return mainmenu()
 			else:
-				print(invalid)
+				mainReadout=999
 				return mainmenu()
 		else:
-			print(invalid)
+			mainReadout=999
 			return mainmenu()
 
 
