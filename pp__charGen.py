@@ -7,7 +7,7 @@ print("\n==========Program Start==========")
 """common Lines and zeroing"""
 debug=False
 menuSel="string"
-mainReadout=1
+mainReadout=991
 charReadout=0
 invalid=("Invalid selection please try again")
 plsEn="Please enter an option:"
@@ -59,15 +59,8 @@ print("")
 def ruleCheckList():
 	rulecheck(dice)
 	rulecheck(race)
+	print("")
 	return
-
-
-
-
-
-
-
-
 
 
 
@@ -77,26 +70,34 @@ def charmenu():
 	global charReadout
 	#debug Options
 	charDebug1=""
-	if debug==True:charDebug1="+[11] Check Character Generation Modules\n"
-	elif debug==False:charDebug1==""
+	charDebug2=""
+	if debug==True:
+		charDebug1="+[11] Check Character Generation Modules\n"
+		charDebug2="+[12] Check Character Generation Modules\n"
+	elif debug==False:
+		charDebug1=""
+		charDebug2=""
+	else:charDebug1=""
 	#header
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Character Generation==========\n")
 	#readout for char
 	if charReadout==0:print("\n")
-	elif charReadout==11:
-		ruleCheckList()
-		print("")
+	elif charReadout==1:dice.displayStatResults()
+	elif charReadout==2:dice.statRolls()
+	elif charReadout==11:ruleCheckList()
+	elif charReadout==12:dice.moduleCheck()
 	elif charReadout==999:print( "%s\n" % invalid)
 	charReadout=0
 	#Options list, it references debug options
-	print("[1] Display Current Character Information\n%s[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program" % charDebug1)
+	print("[1] Display Current Character Information\n%s%s[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program" % (charDebug1, charDebug2))
+	#menu input for char
 	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):return mainmenu()
 	elif menuSel=="1":
-		dice.displayStatResults()
+		charReadout=1
 		return charmenu()
 	elif menuSel=="2":
-		dice.statRolls()
+		charReadout=2
 		return charmenu()
 	elif (menuSel=="*")or(menuSel=="q"):return quit()
 	else:
@@ -105,6 +106,10 @@ def charmenu():
 			if menuSel=="11":
 				print("")
 				charReadout=11
+				return charmenu()
+			if menuSel=="12":
+				print("")
+				charReadout=12
 				return charmenu()
 			else:
 				charReadout=999
@@ -116,14 +121,6 @@ def charmenu():
 	#needs several options
 	#option-1 is appearance
 	#option-2 is dice rolls
-
-
-
-
-
-
-
-
 
 
 
@@ -156,14 +153,6 @@ def utilitymenu():
 
 
 
-
-
-
-
-
-
-
-
 def optionsmenu():
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
 	#dice.statRolls()
@@ -179,33 +168,27 @@ def optionsmenu():
 
 
 
-
-
-
-
-
-
-
-
 def mainmenu():
 	#global variable check
 	global mainReadout
 	#debug Options
 	mainDebug1=""
 	if debug==True:mainDebug1="+[11] Check Character Generation Modules\n"
-	elif debug==False:mainDebug1==""
+	elif debug==False:mainDebug1=""
 	#header
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Main Menu==========\n")
 	#readout for main
 	if mainReadout==0:print("\n")
-	elif mainReadout==11:
+	elif mainReadout==11:ruleCheckList()
+	elif mainReadout==991:
 		ruleCheckList()
-		print("")
+		dice.moduleCheck()
 	elif mainReadout==999:print( "%s\n" % invalid)
 	else:print("\n")
 	mainReadout=0
 	#Options list, it references debug options
 	print("[1] Character Generation\n%s[2] Utilities\n[3] Options\n[*] or [q] Quit Program" % (mainDebug1))
+	#menu input for main
 	menuSel=raw_input(plsEn)
 	if (menuSel=="t")or(menuSel=="/"):return mainmenu()
 	elif menuSel=="1":return charmenu()
@@ -233,10 +216,6 @@ def mainmenu():
 
 
 
-
-
-
-
 def quit():
 	print("\nQuitting Program")
 	raw_input("Press Enter to close the program")
@@ -246,6 +225,6 @@ raw_input("Nothing left to run, press Enter to close the program")
 
 """debug outline"""
 #Done-main menu 1: lsit modules for character generation
-#Char Gen Menu 1: lsit modules for character generation
-#Char Gen Menu 2: Values for Dice Rolls
+#Done-Char Gen Menu 1: lsit modules for character generation
+#Done-Char Gen Menu 2: Values for Dice Rolls
 #UDone-tilities 1 Debug
