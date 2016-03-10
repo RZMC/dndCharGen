@@ -27,8 +27,7 @@ class attributeRolls(object):
 		self.rolledAttributes=["", ""]
 		self.batch=0
 		'''sets number of dice batch rolls to zero'''
-	def moduleCheck(self):
-		print("//run module Check start//\nnumber of sides on each die = %s\nnumber of die in a set = %s\nnumber of die sets = %s\n//run module Check complete//\n" % (self.dSides, self.dSetNumber, self.dSets))
+	def moduleCheck(self):return ("//run module Check start//\nnumber of sides on each die = %s\nnumber of die in a set = %s\nnumber of die sets = %s\n//run module Check complete//" % (self.dSides, self.dSetNumber, self.dSets))
 	def statRolls(self):
 		"""this is the method that is called to roll attribute values for a character for the first time, DND3.5 default is 6 sets of 4 rolls of 6 sided dice, however this is designed so that can be adjusted"""
 		#'''clears lists'''
@@ -53,7 +52,7 @@ class attributeRolls(object):
 			self.droppedSets.append(dropped)
 			"""after the rolls are done, normally 4 of them, the set is added to the rollSets variable container as well as adding to the dropped sets container and adding to the batcch number"""
 		self.batch+=1
-		print("\nnumber of batch attempts:"+str(self.batch)+"\nStat Rolls")
+		print("number of batch attempts:"+str(self.batch)+"\nStat Rolls")
 		"""after all of the sets have been added to the set container the sets are printed out, the following 3 lines make it print the sets vertically"""
 		for rs in range(len(self.rollSets)): 
 			at=0
@@ -61,13 +60,11 @@ class attributeRolls(object):
 				at+=self.droppedSets[rs][rls]
 			self.rolledAttributes.append(at)
 			print((self.rollSets[rs]), (self.rolledAttributes[rs]))
-		print("")
 	def displayStatResults(self):
 		"""This method when called will print the results of the rollSets and the sum of the three highest rolls, or it will state that no rolls have been made"""
-		print("\nbatch attempt:"+str(self.batch)+"\nStat Rolls")
+		print("batch attempt:"+str(self.batch)+"\nStat Rolls")
 		for rs in range(len(self.rollSets)):
 			print((self.rollSets[rs]), (self.rolledAttributes[rs]))
-		print("")
 		return
 		#each set contains the three highest rolls after 4 rolls
 		#should end up with6 sets of 3 dice rolls
