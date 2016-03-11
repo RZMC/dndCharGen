@@ -1,105 +1,84 @@
+#main file, run this one
+print("\n==========Program Start==========")
 #checks version and fixes raw_input for python 3 makign the code run on both 2.x and 3.x
 import sys
 if sys.version[0]=="3": raw_input=input
 #imports the command for generating random numbers
 from random import randint
-print("\n==========Program Start==========")
-#common Lines and zeroing
+#sets global/common variable Lines and zeroing
 debug=False
-menuSel="string"
-mReadout=991
-cReadout=0
 invalid=("Invalid selection please try again")
 plsEn="Please enter an option:"
-#Rule and table placeholder base
+blank=""
+print("\n==========Checking Modules==========")
+#Rule and table placeholder base, sets the false value for class objects that have nto been loaded, states when the user attempts to use a module that is not loaded by name
 class nomod(object):
 	ruleCheck=False
 	def n(self):
-		print("\nNo %s Module Loaded" % str(self.checkName))
+		print("\nNo %s Module Loaded" % str(self.moduleName))
 		return
 #Rule and Table Placeholders
+#this needs serious fixing, charmenu needs to become more dynamic so I can get rid of a lot of these placeholders
 class attributeRolls(nomod):
-	def __init__(self):self.checkName="Dice Module"
+	def __init__(self):self.moduleName="Dice Module"
 	def moduleCheck(self):return self.n()
 	def statRolls(self):return self.n()
 	def displayStatResults(self):return self.n()
 dice=attributeRolls()
 class raceRules(nomod):
-	def __init__(self):self.checkName="Race Module"
+	def __init__(self):self.moduleName="Race Module"
 race=raceRules()
-print("==========Checking Modules==========")
-#config file check that handles imports goes here, until them import will just go here
+#this is where a config file check that handles imports would go, IF I HAD ONE
 from pp_module_diceRule import dice
 #from pp_module_raceRule import race
-print("")
-dice.moduleCheck()
-
-#importing as in the following line does not work except for singular instances, just for reference
-#import pp_module_diceRule
 #rule check method goes here, referenced later for checks
+print("\n==========Setting up Menus==========")
 def rulecheck(s):
-	if s.ruleCheck==True:
+	if s.ruleCheck:
 		ruleCheck=True
-		print("%s Rules: Present and %s." % (s.checkName, s.ruleCheck))
-		return
-	elif s.ruleCheck==False:
-		print("%s Rules: Not Present and %s, please select" % (s.checkName, s.ruleCheck))
-		return
-print("")
-#"""Rule Checks"""
-#"""Referenced Immediately and as option 5 of overmenu"""
-#"""checks to make sure rule has been loaded by checking 'ruleCheck' variable in each class using 'rulecheck' method created earlier in the prototype main file"""
+		return print("%s Rules: Present and %s." % (s.moduleName, s.ruleCheck))
+	else:return print("%s Rules: Not Present and %s, please select" % (s.moduleName, s.ruleCheck))
+	#"""Rule Checks"""
+	#"""Referenced Immediately and as option 5 of overmenu"""
+	#"""checks to make sure rule has been loaded by checking 'ruleCheck' variable in each class using 'rulecheck' method created earlier in the prototype main file"""
 def ruleCheckList():
-	x=""
 	rulecheck(dice)
 	rulecheck(race)
-	return x
+	return blank
 
 
 
 
-def cRead(x):
-	global cReadout
-	cReadout=x
-	return charmenu()
-
-def charmenu():
-	#global variable check
-	global cReadout
+def charmenu(cReadout):
 	#debug Options
 	cDebug1=""
 	cDebug2=""
-	if debug==True:
+	if debug:
 		cDebug1="+[11] Check Character Generation Modules\n"
 		cDebug2="+[12] Check Character Generation Modules\n"
-	elif debug==False:
-		cDebug1=""
-		cDebug2=""
-	else:cDebug1=""
 	#header
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Character Generation==========\n")
 	#readout for char
-	if cReadout==0:print("")
+	if cReadout==999:print(invalid)
 	elif cReadout==1:dice.displayStatResults()
 		#cReadout 1 needs to be expanded to display all current character information
 	elif cReadout==2:dice.statRolls()
 	elif cReadout==11:ruleCheckList()
 	elif cReadout==12:print(dice.moduleCheck())
-	elif cReadout==999:print(invalid)
-	cReadout=0
-	#Options list, it references debug options
+	else:print("")
+	#options list, it references debug options
 	print("\n[1] Display Current Character Information\n%s%s[2] Roll for Attributes\n[/] or [t] Main Menu\n[*] or [q] Quit Program" % (cDebug1, cDebug2))
 	#CharMenu input
 	menuSel=raw_input(plsEn)
-	if menuSel in("t","/"):return mainmenu()
-	elif menuSel=="1": return cRead(1)
-	elif menuSel=="2":return cRead(2)
+	if menuSel in("t","/"):return mainmenu(0)
+	elif menuSel=="1": return charmenu(1)
+	elif menuSel=="2":return charmenu(2)
 	elif menuSel in ("*", "q"):return quit()
 	#CharMenu Debug Options
-	elif menuSel=="11" and debug:return cRead(11)
-	elif menuSel=="12" and debug:return cRead(12)
-	#Return wrong entry
-	else:return cRead(999)
+	elif menuSel=="11" and debug:return charmenu(11)
+	elif menuSel=="12" and debug:return charmenu(12)
+	#Return invalid entry
+	else:return charmenu(999)
 	#needs appearance option
 	#needs inventory option
 	#-needs to be dynamic with a setting for number of descriptors (name, weight, description etc.)
@@ -109,92 +88,96 @@ def charmenu():
 
 
 
-def utilitymenu():
+def utilitymenu(uReadout):
 	"""the following line checks the global debug variable so it doesn't freak out for usign a variable not defined in the function"""
 	global debug
 	#header
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Utilities==========\n")
-	if debug==False:
-		print("Debug Options: Inactive\n")
-	elif debug==True:
-		print("Debug Options: Active\n")
+	#readout for utility
+	if uReadout==999:print(invalid)
+	else:print("")
+	#debug status
+	if debug:print("\nDebug Options: Active\n")
+	else:print("\nDebug Options: Inactive\n")
+	#options list
 	print("[1] Toggle Debug\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
+	#menu input for utility
 	menuSel=raw_input(plsEn)
-	if menuSel in("t","/"):return mainmenu()
+	if menuSel in("t","/"):return mainmenu(0)
 	elif menuSel=="1":
-		if debug==False:
-			debug=True
-		elif debug==True:
-			debug=False
-		return utilitymenu()
+		if debug:debug=False
+		else:debug=True
+		return utilitymenu(0)
 	elif menuSel in ("*", "q"):return quit()
-	else:
-		print(invalid)
-		return utilitymenu()
+	else:return utilitymenu(999)
 
 
 
 
-def optionsmenu():
-	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Options==========\n\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
-	#dice.statRolls()
+def optionsmenu(oReadout):
+	#header
+	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Options==========\n")
+	#readout for options
+	if oReadout==999:print(invalid)
+	else:print("")
+	#Options list
+	print("\n[/] or [t] Main Menu\n[*] or [q] Quit Program")
+	#menu input for options
 	menuSel=raw_input(plsEn)
-	if menuSel in("t","/"):return mainmenu()
+	if menuSel in("t","/"):return mainmenu(0)
 	elif menuSel in ("*", "q"):return quit()
-	else:
-		print(invalid)
-		return optionsmenu()
+	else:return optionsmenu(999)
 
 
 
 
-def mRead(x):
-	global mReadout
-	mReadout=x
-	return mainmenu()
-
-def mainmenu():
-	#global variable check
-	global mReadout
+def mainmenu(mReadout):
 	#debug readouts
 	mDebug1=""
-	if debug==True:mDebug1="+[11] Check Character Generation Modules\n"
-	elif debug==False:mDebug1=""
+	if debug:mDebug1="+[11] Check Character Generation Modules\n"
 	#header
 	print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n==========Main Menu==========\n")
 	#readout for main
-	if mReadout==0:print("")
+	if mReadout==999:print(invalid)
 	elif mReadout==11:ruleCheckList()
 	elif mReadout==991:print("%s\n%s" % (ruleCheckList(), dice.moduleCheck()))
-	elif mReadout==999:print(invalid)
-	else:print("\n")
-	mReadout=0
+	else:print("")
 	#Options list, it references debug options
 	print("\n[1] Character Generation\n%s[2] Utilities\n[3] Options\n[*] or [q] Quit Program" % (mDebug1))
 	#menu input for main
 	menuSel=raw_input(plsEn)
-	if menuSel in("t","/"):return mainmenu()
-	elif menuSel=="1":return charmenu()
-	elif menuSel=="2":return utilitymenu()
-	elif menuSel=="3":return optionsmenu()
+	if menuSel in("t","/"):return mainmenu(0)
+	elif menuSel=="1":return charmenu(0)
+	elif menuSel=="2":return utilitymenu(0)
+	elif menuSel=="3":return optionsmenu(0)
 	#mainmenu debug inputs
-	elif menuSel=="11" and debug:return mRead(11)
+	elif menuSel=="11" and debug:return mainmenu(11)
 	elif menuSel in ("*", "q"):return quit()
-	#Return wrong entry
-	else:return mRead(999)
+	#Return invalid entry
+	else:return mainmenu(999)
+
+
+
+
+#may use this if I wish to avoid globals
+#def startmenu():
+	#mainmenu(debug, readout)
 
 
 
 
 def quit():raw_input("\nQuitting Program\nPress Enter to close the program")
 
-mainmenu()
+mainmenu(991)
 
 raw_input("Nothing left to run, press Enter to close the program")
 
-"""updates"""
+"""updates 030916"""
 #added Debug stuff
 #condensed  if statements, cleaned up the code, shifted some spacers around to reduce text
+
+"""update 031016"""
+#cleaned up a bunch of code because it seemed sloppy an unorganized to me leading me sicne I ahd a hard time reading it
 
 """Condense Menu if"""
 #change if and elif statements to read out as 'if/elif menuSel in ("t", "/"")' instead of 'if (menuSel=="t")or(menuSel=="/")' and 'menuSel in ("*", "q")' instead of '(menuSel=="*")or(menuSel=="q")'
@@ -206,3 +189,7 @@ raw_input("Nothing left to run, press Enter to close the program")
 #Done-Char Gen Menu 1: lsit modules for character generation
 #Done-Char Gen Menu 2: Values for Dice Rolls
 #UDone-tilities 1 Debug
+
+"""importing info"""
+#importing as in the following line does not work except for singular instances, just for reference
+#import pp_module_diceRule
