@@ -36,8 +36,11 @@ print("\n==========Setting up Menus==========")
 def rulecheck(s):
 	if s.ruleCheck:
 		ruleCheck=True
-		return print("%s Rules: Present and %s." % (s.moduleName, s.ruleCheck))
-	else:return print("%s Rules: Not Present and %s, please select" % (s.moduleName, s.ruleCheck))
+		print("%s Rules: Present and %s." % (s.moduleName, s.ruleCheck))
+		return
+	else:
+		print("%s Rules: Not Present and %s, please select" % (s.moduleName, s.ruleCheck))
+		return
 	#"""Rule Checks"""
 	#"""Referenced Immediately and as option 5 of overmenu"""
 	#"""checks to make sure rule has been loaded by checking 'ruleCheck' variable in each class using 'rulecheck' method created earlier in the prototype main file"""
