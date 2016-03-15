@@ -39,7 +39,32 @@ create a main menu that accesses the submenues
       3. skin color
       4. age
   4. Class
-    1. 
+    1. Feats
+    2. Spells
+  5. Equipment(this needs to have a common item programming class where certain attributes are shared)
+    1. Weapon attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. Weapon, Attack Hit
+      6. Weapon, Attack Damage
+      7. Weapon, Damage Type
+      8. Weapon, Finesse (True, False)
+    2. Armor Attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. Armor, defense
+      6. Armor, Weight Class (light, medium, heavy)
+    3. Misc Attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. 
+  5. 
 
 ###Utilities
 1. Import Rules and Tables
