@@ -182,6 +182,9 @@ raw_input("Nothing left to run, press Enter to close the program")
 """update 031016"""
 #cleaned up a bunch of code because it seemed sloppy an unorganized to me leading me sicne I ahd a hard time reading it
 
+"""update 031516"""
+#I decided my dice rolling code was garbage and started rewriting it and may move it to the primary module when it's done
+
 """Condense Menu if"""
 #change if and elif statements to read out as 'if/elif menuSel in ("t", "/"")' instead of 'if (menuSel=="t")or(menuSel=="/")' and 'menuSel in ("*", "q")' instead of '(menuSel=="*")or(menuSel=="q")'
 #change debug if and elif statements to read more like 'if menuSel=="11" and debug' instead of having it nested in another if statement under the else statement and using '==True' becasues apparently you don't need that all the time

@@ -5,6 +5,7 @@ number_of_sides_on_die=6
 die_number_per_set=4
 sets_of_dice_rolls=6
 lowest_possible_roll=1
+#mulligan_yes_or_no=True not implemented
 #reroll Die= not implemented
 #Drop Lowest= not implemented
 moduleName="Dice Module"
@@ -30,6 +31,7 @@ class attributeRolls(object):
 		self.rollBatch=[]
 		self.droppedBatch=[]
 		self.attributeResults=[]
+
 		#creates Recursion loop that ends after sets_of_dice_rolls number of times, each time creating and clearing sub lists
 		for setNumber in range(self.dieSets):
 			rolls=[]
@@ -43,8 +45,12 @@ class attributeRolls(object):
 			self.rollBatch.append(rolls)
 			dropped.remove(min(dropped))
 			self.droppedBatch.append(dropped)
+
+
 		#after the roll sets have been added to the batch the batch count is incremented up one
 		self.batch+=1
+
+
 		#after the numbers have been generated and appended to the batch the sets are printed out vertically
 		print("number of batch attempts:"+str(self.batch)+"\nStat Rolls")
 		for batchSets in range(len(self.rollBatch)): 

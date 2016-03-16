@@ -16,16 +16,55 @@ create a main menu that accesses the submenues
   
 ###Character Gen
   menu specificly for character generation, if the tables have not been loaded it should request basic tables
-  1. Appearance
-    1. preform dice rolls disregarding lowest and creating 6 lists of the three highest rolls for each set of rolls
-    2. requires a RULE file with all the relevant information, some GMs/DMs may want to change it up so at least 3 tables should be made with comments
-    3. should request rule file if none is present so player does not have
-    4. basic table, 6 sets of rolls, 4 rolls per set, drop lowest in each set, single mulligan option rule should be present
-    5. same as above, no mulligan
-    6. same as first table, reroll die on 1
-    7. probably list current rules like "Mulligan: none" and "reroll lowest" just so peopel know what is goign on
+  1.Display Current Character Information
   2. Attribute Roll, selection, and modifiers
-  3. Class
+    1. be able to preform a single dice roll, a set of dice rolls or multiple sets of dice rolls.
+    2. be able to set highest possible roll per die and lowest possible roll
+    3. be able to disregard between 0 and all dice rolls, just because for the dynamicness of it
+    4. be able to toggle mulligans on and off
+    5. mulligans sould have a counter that can be toggled that counts the total ammoutn of tiems mulligans have been rolled
+    6. requires a RULE file with all the relevant information, some GMs/DMs may want to change it up so at least 3 tables should be made with comments
+    7. should request rule file if none is present so player does not have
+    8. default table, 6 sets of rolls, 4 rolls per set, drop lowest in each set, mulligan on and mulligan counter on
+    9. probably list current rules like "Mulligan: none" and "reroll lowest" just so peopel know what is going on
+    10. Option to display current rolls
+  3. Appearance
+    1. Sex
+    2. Race
+      1. attribute modifiers from race, must be compatable with attribute table
+      2. abilities from race as descriptive text
+    3. body features
+      1. hair color
+      2. eye color
+      3. skin color
+      4. age
+  4. Class
+    1. Feats
+    2. Spells
+  5. Equipment(this needs to have a common item programming class where certain attributes are shared)
+    1. Weapon attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. Weapon, Attack Hit
+      6. Weapon, Attack Damage
+      7. Weapon, Damage Type
+      8. Weapon, Finesse (True, False)
+    2. Armor Attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. Armor, defense
+      6. Armor, Weight Class (light, medium, heavy)
+    3. Misc Attributes
+      1. Common, Name
+      2. Common, Weight
+      3. Common, Description
+      4. Common, Value
+      5. 
+  5. 
 
 ###Utilities
 1. Import Rules and Tables
@@ -33,6 +72,7 @@ create a main menu that accesses the submenues
   2. should probably have a submenu or be split amongst utilities
   3. may want to have visual aid
   4. should probably have a config setting to automatically import rules and tables
+  5. Debug Toggle(Probably belongs in options now that I think about it)
 
 ###Options
 
@@ -41,4 +81,4 @@ create a main menu that accesses the submenues
 # current tasks
 create basic 4d6 roll code for ren'py
 
-edit mark 02-02-16
+edit mark 03-15-16
