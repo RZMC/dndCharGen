@@ -8,11 +8,10 @@ moduleName="Dice Module"
 
 #FOR dice rolls
 #mulligan_yes_or_no=True not implemented
-#the_number_of_dice_roll_sets_in_a_batch=6 not implemented
-the_number_of_rolls_in_a_set=4
-the_number_of_sides_on_a_die=6
 the_lowest_possible_roll=1
-reroll_if_equal_or_less=5
+the_number_of_sides_on_a_die=6
+the_number_of_rolls_in_a_set=4
+reroll_if_equal_or_less=0
 number_of_lowest_rolls_to_drop_in_a_set=1
 number_of_highest_rolls_to_drop_in_a_set=1
 
@@ -22,7 +21,7 @@ number_of_highest_rolls_to_drop_in_a_set=1
 
 
 
-"""NEEDS SINGLE ROLL MULLIGANS"""
+
 
 
 
@@ -131,7 +130,7 @@ def roll_set_of_dice():
 	return
 #roll_set_of_dice()
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-#test_4_rolls if drop lowest or highest is greater than zero copy set_of_dice_rolls to adjusted_set_of_dice_rolls
+#test_4_rolls if drop lowest or highest is greater than zero copy set_of_dice_rolls to set_of_dice_rolls_adjusted
 from random import randint
 
 the_number_of_rolls_in_a_set=4
@@ -144,7 +143,7 @@ number_of_highest_rolls_to_drop_in_a_set=0
 #rolls 4 dice between 1 and 6 and rerolls all results that are 5 or less then outputs them to roll_set_of_dice
 def roll_set_of_dice():
 	set_of_dice_rolls=[]
-	adjusted_set_of_dice_rolls=[]
+	set_of_dice_rolls_adjusted=[]
 	for roll in range(the_number_of_rolls_in_a_set): 
 		roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
 		while roll_result<=reroll_if_equal_or_less:
@@ -153,8 +152,8 @@ def roll_set_of_dice():
 		else:set_of_dice_rolls.append(roll_result)
 	if (number_of_lowest_rolls_to_drop_in_a_set>0) or (number_of_highest_rolls_to_drop_in_a_set>0):
 		for roll_results in range(len(set_of_dice_rolls)):
-			adjusted_set_of_dice_rolls.append(set_of_dice_rolls[roll_results])
-		print(adjusted_set_of_dice_rolls)
+			set_of_dice_rolls_adjusted.append(set_of_dice_rolls[roll_results])
+		print(set_of_dice_rolls_adjusted)
 	print(set_of_dice_rolls)
 	return
 #roll_set_of_dice()
@@ -172,7 +171,7 @@ number_of_highest_rolls_to_drop_in_a_set=1
 #rolls 4 dice between 1 and 6 and rerolls all results that are 5 or less then outputs them to roll_set_of_dice
 def roll_set_of_dice():
 	set_of_dice_rolls=[]
-	adjusted_set_of_dice_rolls=[]
+	set_of_dice_rolls_adjusted=[]
 	for roll in range(the_number_of_rolls_in_a_set): 
 		roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
 		while roll_result<=reroll_if_equal_or_less:
@@ -180,30 +179,30 @@ def roll_set_of_dice():
 			print("reroll %s" %roll_result)
 		else:set_of_dice_rolls.append(roll_result)
 	for roll_results in range(len(set_of_dice_rolls)):
-		adjusted_set_of_dice_rolls.append(set_of_dice_rolls[roll_results])
-	print("\n////Break////\n%s\n%s\n////Break////\n" % (set_of_dice_rolls, adjusted_set_of_dice_rolls))
+		set_of_dice_rolls_adjusted.append(set_of_dice_rolls[roll_results])
+	print("\n////Break////\n%s\n%s\n////Break////\n" % (set_of_dice_rolls, set_of_dice_rolls_adjusted))
 	if (number_of_lowest_rolls_to_drop_in_a_set>0) or (number_of_highest_rolls_to_drop_in_a_set>0):
 		if number_of_lowest_rolls_to_drop_in_a_set>0:
 			drop_counter=0
 			drop_counter+=number_of_lowest_rolls_to_drop_in_a_set
-			#print(adjusted_set_of_dice_rolls)
+			#print(set_of_dice_rolls_adjusted)
 			#print(drop_counter)
 			while drop_counter>0:
-				adjusted_set_of_dice_rolls.remove(min(adjusted_set_of_dice_rolls))
-				#print(adjusted_set_of_dice_rolls)
+				set_of_dice_rolls_adjusted.remove(min(set_of_dice_rolls_adjusted))
+				#print(set_of_dice_rolls_adjusted)
 				drop_counter-=1
 				#print(drop_counter)
 		if number_of_highest_rolls_to_drop_in_a_set>0:
 			drop_counter=0
 			drop_counter+=number_of_highest_rolls_to_drop_in_a_set
-			#print(adjusted_set_of_dice_rolls)
+			#print(set_of_dice_rolls_adjusted)
 			#print(drop_counter)
 			while drop_counter>0:
-				adjusted_set_of_dice_rolls.remove(max(adjusted_set_of_dice_rolls))
-				#print(adjusted_set_of_dice_rolls)
+				set_of_dice_rolls_adjusted.remove(max(set_of_dice_rolls_adjusted))
+				#print(set_of_dice_rolls_adjusted)
 				drop_counter-=1
 				#print(drop_counter)
-	print("\n////Break////\n%s\n%s\n////Break////\n" % (set_of_dice_rolls, adjusted_set_of_dice_rolls))
+	print("\n////Break////\n%s\n%s\n////Break////\n" % (set_of_dice_rolls, set_of_dice_rolls_adjusted))
 	return
 roll_set_of_dice()
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

@@ -1,72 +1,110 @@
 #this file is explicitly for rolling dice
 from random import randint
 '''Custom Variables, this is where you adjust the module for personal use'''
-number_of_sides_on_die=6
-die_number_per_set=4
-sets_of_dice_rolls=6
-lowest_possible_roll=1
+the_lowest_possible_roll=1
+the_number_of_sides_on_a_die=6
+the_number_of_rolls_in_a_set=4
+the_number_of_sets_of_dice_rolls=6
+reroll_if_equal_or_less=0
+number_of_lowest_rolls_to_drop_in_a_set=1
+number_of_highest_rolls_to_drop_in_a_set=0
+
+
 #mulligan_yes_or_no=True not implemented
-#reroll Die= not implemented
-#Drop Lowest= not implemented
 moduleName="Dice Module"
-#moduleName="The Lusty Orc Dice Module"
+#moduleName="The Lusty Orc Bride Dice Module"
 #Rules for attribute rolls, Do not alter anything past this line
 class attributeRolls(object):
 	#sets the rule toggle to True so that the program will know that the rule has been loaded
 	ruleCheck=True
 	#sets the module name, the number of die sides, number rolled per set, total die sets rolled and the lists to empty so the program does not freak out and then sets the set batch number to 0
-	def __init__(self, die_sides, die_number, die_sets):
+	def __init__(self, lowest_roll, die_sides, die_number, die_sets, reroll_die, low_drop, high_drop):
 		self.moduleName=moduleName
-		self.dieSides=die_sides
-		self.setDieNumber=die_number
-		self.dieSets=die_sets
-		self.rollBatch=["", "No dice have been rolled"]
-		self.droppedBatch=["", ""]
-		self.attributeResults=["", ""]
+		self.the_lowest_possible_roll=lowest_roll
+		self.the_number_of_sides_on_a_die=die_sides
+		self.the_number_of_rolls_in_a_set=die_number
+		self.the_number_of_sets_of_dice_rolls=die_sets
+		self.reroll_if_equal_or_less=reroll_die
+		self.number_of_lowest_rolls_to_drop_in_a_set=low_drop
+		self.number_of_highest_rolls_to_drop_in_a_set=high_drop
+		self.list_of_roll_set_results=["No dice have been rolled"]
+		self.list_of_roll_set_results_adjusted=["No dice have been rolled"]
+		self.attribute_results=["No dice have been rolled"]
+		self.attribute_results_modifier=[""]
 		self.batch=0
-	def moduleCheck(self):return ("//run module Check start//\nnumber of sides on each die = %s\nnumber of die in a set = %s\nnumber of die sets = %s\n//run module Check complete//" % (self.dieSides, self.setDieNumber, self.dieSets))
-	#this is the method that is called to roll attribute values for a character for the first time, DND3.5 default is 6 sets of 4 rolls of 6 sided dice, however this is designed so that can be adjusted
-	def statRolls(self):
-		#creats and clears lists at start of stat generation the Top Set Container that will house all of the sets or if it exists zeroes out the values
-		self.rollBatch=[]
-		self.droppedBatch=[]
-		self.attributeResults=[]
 
-		#creates Recursion loop that ends after sets_of_dice_rolls number of times, each time creating and clearing sub lists
-		for setNumber in range(self.dieSets):
-			rolls=[]
-			dropped=[]
-			#creates another recursion loop that runs for die_number_per_set times and addes a random roll result to the rolls and dropped lists using the x variable, each roll is between the values lowest_possible_roll and number_of_sides_on_die
-			for roll in range(self.setDieNumber):
-				r=(randint(lowest_possible_roll, self.dieSides))
-				rolls.append(r)
-				dropped.append(r)
-			#after the rolls are done, normally 4 of them, the set is added to the rollBatch variable container as well as adding to the dropped sets container
-			self.rollBatch.append(rolls)
-			dropped.remove(min(dropped))
-			self.droppedBatch.append(dropped)
-
-
-		#after the roll sets have been added to the batch the batch count is incremented up one
-		self.batch+=1
-
-
-		#after the numbers have been generated and appended to the batch the sets are printed out vertically
-		print("number of batch attempts:"+str(self.batch)+"\nStat Rolls")
-		for batchSets in range(len(self.rollBatch)): 
-			at=0
-			for batchRolls in range(len(self.droppedBatch[batchSets])):at+=self.droppedBatch[batchSets][batchRolls]
-			self.attributeResults.append(at)
-			print((self.rollBatch[batchSets]), (self.attributeResults[batchSets]))
-	#This method when called will print the results of the rollBatch and the sum of the three highest rolls, or it will state that no rolls have been made
-	def displayStatResults(self):
-		print("batch attempt:"+str(self.batch)+"\nStat Rolls")
-		for batch_result_Item in range(len(self.rollBatch)):print((self.rollBatch[batch_result_Item]), (self.attributeResults[batch_result_Item]))
+	def moduleCheck(self):return ("//run module Check start//\nlowest possible roll =%s\nhighest possible roll = %s\nnumber of die rolled in a set = %s\nnumber of die sets rolled = %s\nreroll if less than or equal to = %s\nnumber of lowest rolls in a set to drop =%s\nnumber of highest rolls in a set to drop = %s\n//run module Check complete//" % (self.the_lowest_possible_roll, self.the_number_of_sides_on_a_die, self.the_number_of_rolls_in_a_set, self.the_number_of_sets_of_dice_rolls, self.reroll_if_equal_or_less, self.number_of_lowest_rolls_to_drop_in_a_set, self.number_of_highest_rolls_to_drop_in_a_set))
+	
+	def roll_set_of_dice(self):
+		self.set_of_dice_rolls=[]
+		self.set_of_dice_rolls_adjusted=[]
+		for roll in range(the_number_of_rolls_in_a_set): 
+			roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
+			while roll_result<=reroll_if_equal_or_less:
+				roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
+				print("reroll %s" %roll_result)
+			else:self.set_of_dice_rolls.append(roll_result)
+		for roll_results in range(len(self.set_of_dice_rolls)):
+			self.set_of_dice_rolls_adjusted.append(self.set_of_dice_rolls[roll_results])
+		if (self.number_of_lowest_rolls_to_drop_in_a_set>0) or (self.number_of_highest_rolls_to_drop_in_a_set>0):
+			if self.number_of_lowest_rolls_to_drop_in_a_set>0:
+				drop_counter=0
+				drop_counter+=self.number_of_lowest_rolls_to_drop_in_a_set
+				while drop_counter>0:
+					self.set_of_dice_rolls_adjusted.remove(min(self.set_of_dice_rolls_adjusted))
+					drop_counter-=1
+			if self.number_of_highest_rolls_to_drop_in_a_set>0:
+				drop_counter=0
+				drop_counter+=self.number_of_highest_rolls_to_drop_in_a_set
+				while drop_counter>0:
+					self.set_of_dice_rolls_adjusted.remove(max(self.set_of_dice_rolls_adjusted))
+					drop_counter-=1
 		return
-		#each set contains the three highest rolls after 4 rolls
-		#should end up with6 sets of 3 dice rolls
-		#may as well just add them and produce the total to save on list coding but still print the results of the rolls
-dice=attributeRolls(number_of_sides_on_die, die_number_per_set, sets_of_dice_rolls)
+
+	def statRolls(self):
+		self.list_of_roll_set_results=[]
+		self.list_of_roll_set_results_adjusted=[]
+		self.attribute_results=[]
+		self.attribute_results_modifier=[]
+		for set_count_number in range(self.the_number_of_sets_of_dice_rolls):
+			self.roll_set_of_dice()
+			self.list_of_roll_set_results.append(self.set_of_dice_rolls)
+			self.list_of_roll_set_results_adjusted.append(self.set_of_dice_rolls_adjusted)
+		self.batch+=1
+		print("number of batch attempts:"+str(self.batch)+"\nStat Rolls")
+		for batchSets in range(len(self.list_of_roll_set_results)): 
+			at=0
+			at_mod=0
+			for batchRolls in range(len(self.list_of_roll_set_results_adjusted[batchSets])):at+=self.list_of_roll_set_results_adjusted[batchSets][batchRolls]
+			self.attribute_results.append(at)
+			at-=10
+			if at<0:
+				if at % 2 == 0:
+					at/=2
+					at_mod=at
+				else:
+					at-=1
+					at/=2
+					at_mod=at
+			elif at>0:
+				if at % 2 == 0:
+					at/=2
+					at_mod=at
+				else:
+					at-=1
+					at/=2
+					at_mod=at
+			else: at_mod=at
+			self.attribute_results_modifier.append(int(at_mod))
+			print((self.list_of_roll_set_results[batchSets]), (self.attribute_results[batchSets]), self.attribute_results_modifier[batchSets])
+		self.displayStatResults()
+
+	def displayStatResults(self):
+		print("batch attempt:"+str(self.batch)+"\nStat Rolls with Modifiers")
+		for batch_result_Item in range(len(self.list_of_roll_set_results)):print("%s | %s" %(str(self.attribute_results[batch_result_Item]).rjust(2), str(self.attribute_results_modifier[batch_result_Item]).rjust(3)))
+		return
+
+dice=attributeRolls(the_lowest_possible_roll, the_number_of_sides_on_a_die, the_number_of_rolls_in_a_set, the_number_of_sets_of_dice_rolls, reroll_if_equal_or_less, number_of_lowest_rolls_to_drop_in_a_set, number_of_highest_rolls_to_drop_in_a_set)
 
 
 '''needs equation to produce modifiers, check for divite by 2, cant just subtract by 10'''
@@ -79,6 +117,15 @@ dice=attributeRolls(number_of_sides_on_die, die_number_per_set, sets_of_dice_rol
 '''needs variables for names of attributes'''
 '''then a method to assign attributes to the respective names'''
 
+'''NEEDS toggle for attribut result and modifier result averages'''
+"""NEEDS SINGLE ROLL MULLIGANS"""
+
 """Update 03-10-16"""
 #changed variable and list parts so I could look at it and understand what my own code was saying because I forgot and could barely follow
 #changed the comments because the """ and ''' comments in bright yellow were making it hard for me to see the actual code, also condensed the comments
+
+"""Update 03-29-16"""
+#replaced the current dice roll code with the tested roll code
+#reworked the set roll code and added in modifiers
+#changed the way Stat Results are displayed
+#still need to rework the character generation menu to have a dice rolls sub menu with roll action, previous batch result list, current batch result list, toggle for attribut result and modifier result averages
