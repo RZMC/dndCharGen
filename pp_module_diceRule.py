@@ -1,7 +1,7 @@
 
 '''Custom Variables, this is where you adjust the module for personal use'''
-the_lowest_possible_roll=1
-the_number_of_sides_on_a_die=6
+the_lowest_possible_roll=2
+the_highest_possible_roll=6
 the_number_of_rolls_in_a_set=4
 the_number_of_sets_of_dice_rolls=6
 reroll_if_equal_or_less=0
@@ -9,7 +9,7 @@ number_of_lowest_rolls_to_drop_in_a_set=1
 number_of_highest_rolls_to_drop_in_a_set=0
 minimum_average_attribute_or_else_reroll=3
 #raising minimum_average_attribute_modifier_or_else_reroll above 2.5 is not recomended with Dungeons and Dragons stat rolls and with default recursion limit will crash the program
-minimum_average_attribute_modifier_or_else_reroll=-1
+minimum_average_attribute_modifier_or_else_reroll=1
 
 #mulligan_yes_or_no=True not implemented
 moduleName="Dice Module"
@@ -26,7 +26,7 @@ class attributeRolls(object):
 	def __init__(self, lowest_roll, die_sides, die_number, die_sets, reroll_die, low_drop, high_drop, att_avg, mod_avg):
 		self.moduleName=moduleName
 		self.the_lowest_possible_roll=lowest_roll
-		self.the_number_of_sides_on_a_die=die_sides
+		self.the_highest_possible_roll=die_sides
 		self.the_number_of_rolls_in_a_set=die_number
 		self.the_number_of_sets_of_dice_rolls=die_sets
 		self.reroll_if_equal_or_less=reroll_die
@@ -42,15 +42,15 @@ class attributeRolls(object):
 		self.attribute_results_modifier=[""]
 		self.batch=0
 
-	def moduleCheck(self):return ("//run module Check start//\nlowest possible roll =%s\nhighest possible roll = %s\nnumber of die rolled in a set = %s\nnumber of die sets rolled = %s\nreroll if less than or equal to = %s\nnumber of lowest rolls in a set to drop =%s\nnumber of highest rolls in a set to drop = %s\nlowest possible modifier average =%s\n//run module Check complete//" % (self.the_lowest_possible_roll, self.the_number_of_sides_on_a_die, self.the_number_of_rolls_in_a_set, self.the_number_of_sets_of_dice_rolls, self.reroll_if_equal_or_less, self.number_of_lowest_rolls_to_drop_in_a_set, self.number_of_highest_rolls_to_drop_in_a_set, self.minimum_average_attribute_modifier_or_else_reroll))
+	def moduleCheck(self):return ("//run module Check start//\nlowest possible roll =%s\nhighest possible roll = %s\nnumber of die rolled in a set = %s\nnumber of die sets rolled = %s\nreroll if less than or equal to = %s\nnumber of lowest rolls in a set to drop =%s\nnumber of highest rolls in a set to drop = %s\nlowest possible modifier average =%s\n//run module Check complete//" % (self.the_lowest_possible_roll, self.the_highest_possible_roll, self.the_number_of_rolls_in_a_set, self.the_number_of_sets_of_dice_rolls, self.reroll_if_equal_or_less, self.number_of_lowest_rolls_to_drop_in_a_set, self.number_of_highest_rolls_to_drop_in_a_set, self.minimum_average_attribute_modifier_or_else_reroll))
 
 	def roll_set_of_dice(self):
 		self.set_of_dice_rolls=[]
 		self.set_of_dice_rolls_adjusted=[]
 		for roll in range(the_number_of_rolls_in_a_set): 
-			roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
+			roll_result=(randint(the_lowest_possible_roll, the_highest_possible_roll))
 			while roll_result<=reroll_if_equal_or_less:
-				roll_result=(randint(the_lowest_possible_roll, the_number_of_sides_on_a_die))
+				roll_result=(randint(the_lowest_possible_roll, the_highest_possible_roll))
 				print("reroll %s" %roll_result)
 			else:self.set_of_dice_rolls.append(roll_result)
 		for roll_results in range(len(self.set_of_dice_rolls)):
@@ -117,7 +117,7 @@ class attributeRolls(object):
 		for batch_result_Item in range(len(self.list_of_roll_set_results)):print("%s |%s" %(str(self.attribute_results[batch_result_Item]).rjust(2), str(self.attribute_results_modifier[batch_result_Item]).rjust(3)))
 		return
 
-dice=attributeRolls(the_lowest_possible_roll, the_number_of_sides_on_a_die, the_number_of_rolls_in_a_set, the_number_of_sets_of_dice_rolls, reroll_if_equal_or_less, number_of_lowest_rolls_to_drop_in_a_set, number_of_highest_rolls_to_drop_in_a_set, minimum_average_attribute_or_else_reroll, minimum_average_attribute_modifier_or_else_reroll)
+dice=attributeRolls(the_lowest_possible_roll, the_highest_possible_roll, the_number_of_rolls_in_a_set, the_number_of_sets_of_dice_rolls, reroll_if_equal_or_less, number_of_lowest_rolls_to_drop_in_a_set, number_of_highest_rolls_to_drop_in_a_set, minimum_average_attribute_or_else_reroll, minimum_average_attribute_modifier_or_else_reroll)
 
 
 '''needs equation to produce modifiers, check for divite by 2, cant just subtract by 10'''
